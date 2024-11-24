@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>412</width>
+    <height>300</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">    background-color: #eafaf1; </string>
+  </property>
+  <widget class="QLabel" name="taille_arbre_label_2">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>20</y>
+     <width>291</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+	font-size: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+	background-color: rgba(0,0,0,0);
+	border: none;
+}</string>
+   </property>
+   <property name="text">
+    <string>Creation Premier Noeud</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="confirm">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>230</y>
+     <width>151</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton {
+    background-color: #45ff00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+QPushButton:hover {
+    background-color: #34c200; 
+}
+
+QPushButton:pressed {
+    background-color: #2ea802;
+    border: 2px solid #2c9e02; 
+}
+</string>
+   </property>
+   <property name="text">
+    <string>Confirmer</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nom_noeu_creation">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>180</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nom_noeud_creation_label">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>150</y>
+     <width>243</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 14px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string>NOM noeud : </string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nom_arbre_creation">
+   <property name="geometry">
+    <rect>
+     <x>80</x>
+     <y>110</y>
+     <width>251</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QLabel" name="nom_arbre_creation_label">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>80</y>
+     <width>243</width>
+     <height>37</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">font-size: 14px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+   </property>
+   <property name="text">
+    <string>NOM arbre : </string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

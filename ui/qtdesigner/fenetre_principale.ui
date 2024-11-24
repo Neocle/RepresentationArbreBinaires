@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1067</width>
+    <height>609</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">background-color: white
+</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="frame">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>-30</y>
+      <width>291</width>
+      <height>661</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame {
+    background-color: #eafaf1; 
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 10px;
+}
+</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::StyledPanel</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Raised</enum>
+    </property>
+    <widget class="QPushButton" name="resetTree">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>560</y>
+       <width>241</width>
+       <height>51</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+QPushButton:hover {
+    background-color: #c0392b; 
+}
+
+QPushButton:pressed {
+    background-color: #a93226;
+    border: 2px solid #922b21; 
+}
+</string>
+     </property>
+     <property name="text">
+      <string>Reset l'arbre</string>
+     </property>
+    </widget>
+    <widget class="QScrollArea" name="scrollArea">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>30</y>
+       <width>291</width>
+       <height>331</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">
+* { 
+	border: none;
+	background-color: rgba(0,0,0,0);
+}
+
+
+QScrollBar:vertical {
+    border: none;
+    background-color: rgba(0,0,0,0);
+    width: 10px; 
+    margin: 0px; 
+}
+
+QScrollBar::handle:vertical {
+    background: #888; 
+    min-height: 20px;
+    border-radius: 5px;
+}
+
+QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+    border: none;
+    background: none;
+    height: 0px;
+}
+</string>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scrollAreaWidgetContents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>261</width>
+        <height>670</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout">
+       <item row="1" column="0">
+        <widget class="QLabel" name="nom_arbre_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="4" column="0">
+        <widget class="QLabel" name="taille_arbre_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 14px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Taille (nb de noeuds)</string>
+         </property>
+        </widget>
+       </item>
+       <item row="5" column="0">
+        <widget class="QLabel" name="taille_arbre_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="nom_arbre_label">
+         <property name="minimumSize">
+          <size>
+           <width>236</width>
+           <height>37</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size: 14px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Nom</string>
+         </property>
+        </widget>
+       </item>
+       <item row="17" column="0">
+        <widget class="QLabel" name="pme_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 10px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Profondeur moyenne externe</string>
+         </property>
+        </widget>
+       </item>
+       <item row="20" column="0">
+        <widget class="QLabel" name="pmi_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="16" column="0">
+        <widget class="QLabel" name="pm_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="15" column="0">
+        <widget class="QLabel" name="pm_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 12px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Profondeur moyenne</string>
+         </property>
+        </widget>
+       </item>
+       <item row="18" column="0">
+        <widget class="QLabel" name="pme_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="6" column="0">
+        <widget class="QLabel" name="hauteur_arbre_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 14px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Hauteur</string>
+         </property>
+        </widget>
+       </item>
+       <item row="8" column="0">
+        <widget class="QLabel" name="hauteur_arbre_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="14" column="0">
+        <widget class="QLabel" name="lci_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="12" column="0">
+        <widget class="QLabel" name="lce_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="10" column="0">
+        <widget class="QLabel" name="lc_placeholder">
+         <property name="styleSheet">
+          <string notr="true">QLabel {
+    color: black; /* Text color matching the poker table green for a cohesive look */
+    background-color: white; /* Light background color for contrast */
+    border: 1px solid #B0C4DE; /* Light gray-blue border */
+    border-radius: 6px; /* Rounded corners for a modern look */
+    padding: 4px 8px; /* Padding for spacing */
+    font-size: 14px; /* Font size */
+	text-align:center;
+}</string>
+         </property>
+         <property name="text">
+          <string>N/A</string>
+         </property>
+        </widget>
+       </item>
+       <item row="11" column="0">
+        <widget class="QLabel" name="lce_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 10px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Longueur de cheminement externe</string>
+         </property>
+        </widget>
+       </item>
+       <item row="9" column="0">
+        <widget class="QLabel" name="lc_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 12px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Longueur de cheminement</string>
+         </property>
+        </widget>
+       </item>
+       <item row="13" column="0">
+        <widget class="QLabel" name="lci_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 10px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Longueur de cheminement interne</string>
+         </property>
+        </widget>
+       </item>
+       <item row="19" column="0">
+        <widget class="QLabel" name="pmi_label">
+         <property name="styleSheet">
+          <string notr="true">font-size: 10px;
+font-weight: bold;
+text-transform: uppercase;
+background-color: rgba(0,0,0,0);
+border: none;</string>
+         </property>
+         <property name="text">
+          <string>Profondeur moyenne interne</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="Line" name="line">
+     <property name="geometry">
+      <rect>
+       <x>90</x>
+       <y>380</y>
+       <width>118</width>
+       <height>3</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">border: 2px solid black</string>
+     </property>
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QPushButton" name="pushButton">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>50</y>
+      <width>151</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton {
+    background-color: #45ff00;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+QPushButton:hover {
+    background-color: #34c200; 
+}
+
+QPushButton:pressed {
+    background-color: #2ea802;
+    border: 2px solid #2c9e02; 
+}
+</string>
+    </property>
+    <property name="text">
+     <string>Ajouter Noeud</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
