@@ -18,6 +18,8 @@ class MainWindow(QMainWindow):
         self.arbre_nom = None
         self.noeud_nom = None
 
+        self.colonne_offset = 2000
+
         self.widgets_graphiques = []
         self.liens_a_dessiner = []
 
@@ -120,8 +122,8 @@ class MainWindow(QMainWindow):
 
         self.widgets_graphiques.extend([frame, bouton_gauche, bouton_droit])
 
-        colonne = x
-        ligne = profondeur
+        colonne = int(x + self.colonne_offset)
+        ligne = int(profondeur)
 
         self.ui.gridLayout_noeuds.addWidget(frame, ligne, colonne)
         self.ui.gridLayout_noeuds.addWidget(bouton_gauche, ligne + 1, colonne - 1)
@@ -144,7 +146,7 @@ class MainWindow(QMainWindow):
                 if parent_noeud.Sag is None:
                     parent_noeud.Sag = Arbre(nom_noeud)
                     enfant = parent_noeud.Sag
-                    x_offset = -1
+                    x_offset = -2 ** (5 - parent_noeud.profondeur)
                 else:
                     QMessageBox.warning(self, "Erreur", "Le sous-arbre gauche existe déjà")
                     return
@@ -152,14 +154,14 @@ class MainWindow(QMainWindow):
                 if parent_noeud.Sad is None:
                     parent_noeud.Sad = Arbre(nom_noeud)
                     enfant = parent_noeud.Sad
-                    x_offset = 1
+                    x_offset = 2 ** (5 - parent_noeud.profondeur)
                 else:
                     QMessageBox.warning(self, "Erreur", "Le sous-arbre droit existe déjà")
                     return
 
             x = parent_noeud.x + x_offset
 
-            self.creer_noeud_graphiquement(enfant, x, profondeur=parent_noeud.profondeur + 1)
+            self.creer_noeud_graphiquement(enfant, x - self.colonne_offset, profondeur=parent_noeud.profondeur + 1)
 
             if direction == "gauche" and hasattr(parent_noeud, "bouton_gauche"):
                 parent_noeud.bouton_gauche.hide()

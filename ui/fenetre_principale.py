@@ -42,6 +42,48 @@ class Ui_MainWindow(object):
         self.scrollArea_noeuds.setWidgetResizable(True)
         self.scrollArea_noeuds.setObjectName("scrollArea_noeuds")
 
+        self.scrollArea_noeuds.verticalScrollBar().setStyleSheet("""
+        QScrollBar:vertical {
+        border: none;
+        background-color: rgba(0,0,0,0);
+        width: 10px; 
+        margin: 0px; 
+        }
+
+        QScrollBar::handle:vertical {
+        background: #888; 
+        min-height: 20px;
+        border-radius: 5px;
+        }
+
+        QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        border: none;
+        background: none;
+        height: 0px;
+        }
+        """)
+
+        self.scrollArea_noeuds.horizontalScrollBar().setStyleSheet("""
+        QScrollBar:horizontal {
+        border: none;
+        background-color: rgba(0,0,0,0);
+        height: 10px; 
+        margin: 0px; 
+        }
+
+        QScrollBar::handle:horizontal {
+        background: #888; 
+        min-height: 20px;
+        border-radius: 5px;
+        }
+
+        QScrollBar::add-line:horizontal, QScrollBar::sub-line:horizontal {
+        border: none;
+        background: none;
+        height: 0px;
+        }
+        """)
+
         self.scrollAreaWidgetNoeuds = QWidget()
         self.scrollAreaWidgetNoeuds.setObjectName("scrollAreaWidgetNoeuds")
         self.gridLayout_noeuds = QGridLayout(self.scrollAreaWidgetNoeuds)
