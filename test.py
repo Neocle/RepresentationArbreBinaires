@@ -31,3 +31,5 @@ pme = a.PME(lce,lste_feuille)
 print(f"Profondeur moyenne externe  : {pme}")
 pmi = a.PMI(lci,lste_feuille,a)
 print(f"Profondeur moyenne interne : {pmi}")
+
+

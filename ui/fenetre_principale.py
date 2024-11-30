@@ -9,16 +9,19 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtWidgets import QGridLayout, QScrollArea, QWidget
 
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
+        MainWindow.setWindowIcon(QtGui.QIcon('./images/icon.webp'))
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(1067, 609)
         MainWindow.setStyleSheet("background-color: white\n"
 "")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+
         self.frame = QtWidgets.QFrame(self.centralwidget)
         self.frame.setGeometry(QtCore.QRect(-10, -30, 291, 661))
         self.frame.setStyleSheet("QFrame {\n"
@@ -31,6 +34,22 @@ class Ui_MainWindow(object):
         self.frame.setFrameShape(QtWidgets.QFrame.StyledPanel)
         self.frame.setFrameShadow(QtWidgets.QFrame.Raised)
         self.frame.setObjectName("frame")
+        self.frame.raise_()
+
+        self.scrollArea_noeuds = QScrollArea(self.centralwidget)
+        self.scrollArea_noeuds.setGeometry(QtCore.QRect(300, 20, 700, 500))  # Position et taille
+        self.scrollArea_noeuds.setStyleSheet("* { border: none; background-color: rgba(0, 0, 0, 0); }")
+        self.scrollArea_noeuds.setWidgetResizable(True)
+        self.scrollArea_noeuds.setObjectName("scrollArea_noeuds")
+
+        self.scrollAreaWidgetNoeuds = QWidget()
+        self.scrollAreaWidgetNoeuds.setObjectName("scrollAreaWidgetNoeuds")
+        self.gridLayout_noeuds = QGridLayout(self.scrollAreaWidgetNoeuds)
+        self.gridLayout_noeuds.setObjectName("gridLayout_noeuds")
+
+        self.scrollArea_noeuds.setWidget(self.scrollAreaWidgetNoeuds)
+        MainWindow.setCentralWidget(self.centralwidget)
+
         self.resetTree = QtWidgets.QPushButton(self.frame)
         self.resetTree.setGeometry(QtCore.QRect(30, 560, 241, 51))
         self.resetTree.setStyleSheet("QPushButton {\n"
@@ -57,31 +76,32 @@ class Ui_MainWindow(object):
         self.scrollArea = QtWidgets.QScrollArea(self.frame)
         self.scrollArea.setGeometry(QtCore.QRect(0, 30, 291, 331))
         self.scrollArea.setStyleSheet("\n"
-"* { \n"
-"    border: none;\n"
-"    background-color: rgba(0,0,0,0);\n"
-"}\n"
-"\n"
-"\n"
-"QScrollBar:vertical {\n"
-"    border: none;\n"
-"    background-color: rgba(0,0,0,0);\n"
-"    width: 10px; \n"
-"    margin: 0px; \n"
-"}\n"
-"\n"
-"QScrollBar::handle:vertical {\n"
-"    background: #888; \n"
-"    min-height: 20px;\n"
-"    border-radius: 5px;\n"
-"}\n"
-"\n"
-"QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {\n"
-"    border: none;\n"
-"    background: none;\n"
-"    height: 0px;\n"
-"}\n"
-"")
+        "* { \n"
+        "    border: none;\n"
+        "    background-color: rgba(0,0,0,0);\n"
+        "}"
+        "")
+        self.scrollArea.verticalScrollBar().setStyleSheet("""
+        QScrollBar:vertical {
+        border: none;
+        background-color: rgba(0,0,0,0);
+        width: 10px; 
+        margin: 0px; 
+        }
+
+        QScrollBar::handle:vertical {
+        background: #888; 
+        min-height: 20px;
+        border-radius: 5px;
+        }
+
+        QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical {
+        border: none;
+        background: none;
+        height: 0px;
+        }
+        """)
+
         self.scrollArea.setWidgetResizable(True)
         self.scrollArea.setObjectName("scrollArea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
@@ -300,7 +320,6 @@ class Ui_MainWindow(object):
 "}\n"
 "")
         self.pushButton.setObjectName("pushButton")
-        MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
@@ -310,7 +329,7 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Arbres Binaires"))
         self.resetTree.setText(_translate("MainWindow", "Reset l\'arbre"))
         self.nom_arbre_placeholder.setText(_translate("MainWindow", "N/A"))
         self.taille_arbre_label.setText(_translate("MainWindow", "Taille (nb de noeuds)"))

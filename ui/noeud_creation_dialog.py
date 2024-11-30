@@ -13,6 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Noeud_Creation_Dialog(object):
     def setupUi(self, Dialog):
+        Dialog.setWindowIcon(QtGui.QIcon('./images/icon.webp'))
         Dialog.setObjectName("Dialog")
         Dialog.resize(403, 245)
         Dialog.setStyleSheet("    background-color: #eafaf1; ")
@@ -76,7 +77,7 @@ class Noeud_Creation_Dialog(object):
 
     def retranslateUi(self, Dialog):
         _translate = QtCore.QCoreApplication.translate
-        Dialog.setWindowTitle(_translate("Dialog", "Dialog"))
+        Dialog.setWindowTitle(_translate("Dialog", "Creation Noeud"))
         self.confirm.setText(_translate("Dialog", "Confirmer"))
         self.taille_arbre_label_2.setText(_translate("Dialog", "Creation Noeud"))
         self.nom_noeud_creation_label.setText(_translate("Dialog", "NOM : "))
