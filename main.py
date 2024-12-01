@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QPushButton, QFrame, QLabel, QMessageBox, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QDialog, QPushButton, QFrame, QLabel, QMessageBox
 from PyQt5 import QtCore
 from ui.fenetre_principale import Ui_MainWindow
 from ui.premier_noeud_dialog import Premier_Noeud_Dialog
@@ -7,13 +7,24 @@ from modules.classe_arbre import Arbre
 
 class MainWindow(QMainWindow):
     def __init__(self):
+        """
+        Initialise la fenetre principale de l'application, connecte les boutons et initialise les attrributs
+
+        Attributs :
+            arbre (Arbre) : L'arbre binaire actuel
+            arbre_nom (str) : Le nom de l'arbre
+            noeud_nom (str) : Le nom du nœud
+            colonne_offset (int) : Decalage pour éviter les coordonnées négatives dans la grid
+            widgets_graphiques (list) : Liste des widgets des nœuds
+            noms_noeuds_existants (list) : Liste des nœuds existants dans l'arbre
+        """
         QMainWindow.__init__(self)
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
         self.ui.resetTree.clicked.connect(self.reinitialiser_arbre)
         self.ui.pushButton.clicked.connect(self.ajouter_premier_noeud)
-
+    
         self.arbre = None
         self.arbre_nom = None
         self.noeud_nom = None
@@ -21,17 +32,17 @@ class MainWindow(QMainWindow):
         self.colonne_offset = 2000
 
         self.widgets_graphiques = []
-        self.liens_a_dessiner = []
+        self.noms_noeuds_existants = []
 
     def reinitialiser_arbre(self):
-        """Réinitialise l'arbre en supprimant tout."""
-
+        """
+        Réinitialise l'arbre en supprimant tous les nœuds et en réinitialisant les informations affichées.
+        
+        """
         for widget in self.widgets_graphiques:
             widget.deleteLater()
-        for lien in self.liens_a_dessiner:
-            lien.deleteLater()
         self.widgets_graphiques.clear()
-        self.liens_a_dessiner.clear()
+        self.noms_noeuds_existants.clear()
 
         self.arbre = None
         self.arbre_nom = None
@@ -50,15 +61,25 @@ class MainWindow(QMainWindow):
         self.ui.pushButton.show()
     
     def ajouter_premier_noeud(self):
-        """Créer le premier nœud de l'arbre."""
+        """
+        Crée le premier nœud de l'arbre avec les informations donnees par l'utilisateur
+        
+        Affiche le dialogue poour obtenir les informatins relatives à l'arbre et au premier 
+        nœud et met à jour l'affichage de l'arbre dans l'interface graphique
+        """
         dialog = PremierNoeudCreationDialog(self)
         if dialog.exec_() == QDialog.Accepted:
             self.arbre_nom = dialog.nom_arbre
             self.premier_noeud_nom = dialog.nom_noeud
 
+            if self.premier_noeud_nom in self.noms_noeuds_existants:
+                QMessageBox.warning(self, "Erreur", "Un nœud avec ce nom existe déjà.")
+                return
+
             self.ui.pushButton.hide()
 
             self.arbre = Arbre(self.premier_noeud_nom)
+            self.noms_noeuds_existants.append(self.premier_noeud_nom) 
 
             self.creer_noeud_graphiquement(self.arbre, 2, 0)
 
@@ -66,7 +87,15 @@ class MainWindow(QMainWindow):
             self.mettre_a_jour_labels()
 
     def creer_noeud_graphiquement(self, noeud, x, profondeur=0):
-        """Créer un nœud graphique lié à un nœud logique."""
+        """
+        Crée un widget pour un nœud logique donné et l'ajoute dans l'ui
+
+        Args:
+            noeud (Arbre) : Le nœud logique à afficher
+            x (int) : La position horizontale du nœud
+            profondeur (int) : La profondeur du nœud dans l'arbre
+        """
+
 
         frame = QFrame(self.ui.scrollAreaWidgetNoeuds)
         frame.setStyleSheet("""
@@ -136,11 +165,22 @@ class MainWindow(QMainWindow):
         bouton_gauche.show()
         bouton_droit.show()
 
+
     def ajouter_noeud(self, parent_noeud, direction):
-        """Ajouter un nœud à gauche ou à droite, en maintenant l'organisation de l'arbre."""
+        """
+        Ajoute un nœud à gauche ou a droite du nœud parent
+        
+        Args:
+            parent_noeud (Arbre) : Le nœud parent auquel le nouveau nœud sera ajouté
+            direction (str) : La direction ou le nœud doit être ajouté ("gauche" ou "droit")
+        """
         dialog = CreationDialog(self)
         if dialog.exec() == QDialog.Accepted:
             nom_noeud = dialog.nom_noeud
+
+            if nom_noeud in self.noms_noeuds_existants:
+                QMessageBox.warning(self, "Erreur", "Un nœud avec ce nom existe déjà.")
+                return
 
             if direction == "gauche":
                 if parent_noeud.Sag is None:
@@ -158,6 +198,8 @@ class MainWindow(QMainWindow):
                 else:
                     QMessageBox.warning(self, "Erreur", "Le sous-arbre droit existe déjà")
                     return
+                
+            self.noms_noeuds_existants.append(nom_noeud)
 
             x = parent_noeud.x + x_offset
 
@@ -173,6 +215,9 @@ class MainWindow(QMainWindow):
 
 
     def mettre_a_jour_labels(self):
+        """
+        Met à jour les labels de l'ui avec les informations de l'arbre calculés grace à la classe Arbre
+        """
         dico_hauteur = self.arbre.Hauteur(self.arbre)
         
         lst_feuilles = self.arbre.LstFeuilles(self.arbre)
@@ -200,6 +245,12 @@ class MainWindow(QMainWindow):
 
 class PremierNoeudCreationDialog(QDialog):
     def __init__(self, parent=None):
+        """
+        Initialise le dialogue pour la creation du premier nœud de l'arbre.
+
+        args :
+            parent (QWidget) : Le widget parent (par défault None)
+        """
         QDialog.__init__(self, parent)
         self.ui = Premier_Noeud_Dialog()
         self.ui.setupUi(self)
@@ -207,6 +258,13 @@ class PremierNoeudCreationDialog(QDialog):
         self.ui.confirm.clicked.connect(self.accept_action)
 
     def accept_action(self):
+        """
+        Accepte les valeurs donnes par l'utilisateur pour le nom de l'arbre et du nœud
+
+        Attributs :
+            - nom_arbre (str) : Le nom de l'arbre
+            - nom_noeud (str) : Le nom du premier nœud
+        """
         self.nom_arbre = self.ui.nom_arbre_creation.toPlainText().strip()
         self.nom_noeud = self.ui.nom_noeu_creation.toPlainText().strip()
 
@@ -215,6 +273,12 @@ class PremierNoeudCreationDialog(QDialog):
 
 class CreationDialog(QDialog):
     def __init__(self, parent=None):
+        """
+        Initialise le dialogue pour la création d'un nœud supplémentaire
+
+        args :
+            parent (QWidget) : Le widget parent (par défault None)
+        """
         QDialog.__init__(self, parent)
         self.ui = Noeud_Creation_Dialog()
         self.ui.setupUi(self)
@@ -224,6 +288,12 @@ class CreationDialog(QDialog):
         self.ui.confirm.clicked.connect(self.accept_action)
 
     def accept_action(self):
+        """
+        Accepte la valeur saisie par l'utilisateur pour le nom du nœud
+
+        Attribut :
+            - nom_noeud (str) : Le nom du nœud à ajouter
+        """
         self.nom_noeud = self.ui.nom_noeu_creation.toPlainText().strip()
 
         if self.nom_noeud:

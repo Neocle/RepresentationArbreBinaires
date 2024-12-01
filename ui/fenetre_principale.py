@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setWindowIcon(QtGui.QIcon('./images/icon.webp'))
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1067, 609)
+        MainWindow.setFixedSize(1067, 609)
         MainWindow.setStyleSheet("background-color: white\n"
 "")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -37,7 +37,7 @@ class Ui_MainWindow(object):
         self.frame.raise_()
 
         self.scrollArea_noeuds = QScrollArea(self.centralwidget)
-        self.scrollArea_noeuds.setGeometry(QtCore.QRect(300, 20, 700, 500))  # Position et taille
+        self.scrollArea_noeuds.setGeometry(QtCore.QRect(300, 20, 700, 500))
         self.scrollArea_noeuds.setStyleSheet("* { border: none; background-color: rgba(0, 0, 0, 0); }")
         self.scrollArea_noeuds.setWidgetResizable(True)
         self.scrollArea_noeuds.setObjectName("scrollArea_noeuds")
